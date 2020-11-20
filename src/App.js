@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Contador from './Contador';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+    const [contadores, setContadores] = useState([]);
+
+    const addContador = () => {
+        setContadores([...contadores, <Contador/>]);
+    }
+
+    const removeContador = () => {
+        contadores.pop();
+        setContadores([...contadores]);
+    }
+
+    return (
+        <>
+            <button className='btn btn-primary' onClick={addContador}>Agregar contador</button>
+            <button className='btn btn-danger' onClick={removeContador}>Quitar contador</button>
+            {
+                contadores.length > 0 && contadores.map(el => el)
+            }
+        </>
+    );
 }
 
 export default App;
